@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Công ty Cổ phần Giải pháp Giáo dục Nam Việt." />
+    <meta name="robots" content="noindex,nofollow">
+    <title>Đăng nhập hệ thống - Cổng thông tin trường Đại học Ngoại Ngữ - Đại Học Đà Nẵng</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800&subset=latin,latin-ext">
+    <link rel="icon" type="image/x-icon" href="https://xacthuc.ufl.udn.vn/logo.png">
+    
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .mainLogin {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            background: rgba(83, 70, 134, 0.14);
+            background-position: center;
+            padding: 120px 12px;
+        }
+        .formLogin {
+            width: 500px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        .otherLogin {
+            text-align: center;
+            color: #9993B4;
+        }
+        .otherLoginGGMC {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(83, 70, 134, 0.1019607843);
+            background-color: rgba(83, 70, 134, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+      
+
+        /* Modal Loading */
+        .hienLoading11 {
+            margin-top: -143px;
+        }
+        .anLoading1 {
+            margin-top: 0;
+        }
+        /* Shimeji Styles */
+        body.shimeji-pinned iframe {
+            pointer-events: none;
+        }
+        body.shimeji-select-ie {
+            cursor: cell !important;
+        }
+        #shimeji-contextMenu::-webkit-scrollbar {
+            width: 6px;
+        }
+        #shimeji-contextMenu::-webkit-scrollbar-thumb {
+            background-color: rgba(30,30,30,0.6);
+            border-radius: 3px;
+        }
+        #shimeji-contextMenu::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+  
+    <!-- Login Form -->
+    <div class="mainLogin">
+        <div class="formLogin">
+            <div>
+                <div>
+                    <a class="logo" style="margin-left: 40%;">
+                        <img style="height: auto; width: 100px;" src="https://xacthuc.ufl.udn.vn/logo.png">
+                    </a>
+                </div>
+                <h2 class="text-center">Đăng nhập tài khoản</h2>
+                <div id="loginbox">
+                    <form id="loginForm" action="https://sinhvien.ufl.udn.vn/DangNhap/SaveToken" method="post">
+                        <div class="panel-body">
+                            <div style="display: none;" id="login-alert" class="alert alert-danger col-md-10 col-md-offset-1"></div>
+                            <!-- Thêm CSRF token (thay xxx bằng giá trị thật) -->
+                            <input type="hidden" name="__RequestVerificationToken" value="xxx">
+                            <div style="margin-bottom: 8px; margin-top: 22px;" class="input-group col-md-10 col-md-offset-1">
+                                <span class="input-group-addon" style="color: #ff9c00; border: 1px solid #d3d4d5; background: transparent;">
+                                    <i class="glyphicon glyphicon-home"></i>
+                                </span>
+                                <select class="myselect form-control" data-val="true" data-val-number="The field Role must be a number." data-val-required="The Role field is required." id="cmbRole" name="Role" style="font-weight: bold; border: 1px solid #d3d4d5;">
+                                    <option value="0">Sinh Viên</option>
+                                    <option value="2">Quản Trị Hệ Thống</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 8px;" class="input-group col-md-10 col-md-offset-1">
+                                <span class="input-group-addon" style="color: #1272b7; border: 1px solid #d3d4d5; background: transparent;">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </span>
+                                <input class="form-control" id="UserName" name="UserName" placeholder="Tài khoản" style="border: 1px solid #d3d4d5;" type="text" value="">
+                            </div>
+                            <div style="margin-bottom: 8px; opacity: 0.9;" class="input-group col-md-10 col-md-offset-1">
+                                <span class="input-group-addon" style="color: #625c5c; border: 1px solid #d3d4d5; background: transparent;">
+                                    <i class="glyphicon glyphicon-lock"></i>
+                                </span>
+                                <input class="form-control" id="Password" name="Password" placeholder="Mật khẩu" style="border: 1px solid #d3d4d5;" type="password">
+                            </div>
+                            <div style="margin-top: 5px;" class="input-group col-md-6 col-md-offset-4">
+                                <a href="#" style="text-align: center; color: #257eb1; font-weight: bold; font-size: 12px;" id="resetPassword">[ Quên mật khẩu sinh viên]</a>
+                            </div>
+                            <div style="margin-top: 8px;" class="form-group">
+                                <div class="col-sm-4 col-md-offset-2 controls">
+                                    <button type="submit" class="btn btn-info" style="opacity: 0.9;" onclick="CheckForm()">
+                                        <i class="fa fa-sign-in" aria-hidden="true"> Đăng nhập</i>
+                                    </button>
+                                </div>
+                                <div class="col-sm-4 controls">
+                                    <a id="btn-login" href="/" style="opacity: 0.8;" class="btn btn-danger">
+                                        <i class="fa fa-home" aria-hidden="true"> Trang chủ</i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="form-group error" id="Ero">
+                                <label for="inputPassword6" class="col-sm-12 control-label" style="color: red; text-align: center; padding-top: 10px;"></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Quên Mật Khẩu -->
+    <div class="modal fade" id="modelLayLaiMatKhau">
+        <div class="modal-dialog" role="document" style="width: 25%;">
+            <div class="modal-content" style="width: 370px;">
+                <div class="modal-header">
+                    <div class="form-group">
+                        <h2 class="modal-title" style="color: #3b55aa;">Lấy lại mật khẩu</h2>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="circularG" class="" style="display: none; z-index: 9999; position: relative;">
+                        <div id="circularG_1" class="circularG"></div>
+                        <div id="circularG_2" class="circularG"></div>
+                        <div id="circularG_3" class="circularG"></div>
+                        <div id="circularG_4" class="circularG"></div>
+                        <div id="circularG_5" class="circularG"></div>
+                        <div id="circularG_6" class="circularG"></div>
+                        <div id="circularG_7" class="circularG"></div>
+                        <div id="circularG_8" class="circularG"></div>
+                    </div>
+                    <div id="anHienLoading" class="" style="position: relative; width: 100%;">
+                        <div class="form-group">
+                            <div class="row" style="text-align: center; vertical-align: middle; color: red; font-weight: bold; width: 95%; margin-left: 10px;">
+                                Bước 1: Nhập mã sv nhấn <u>Gửi mã xác nhận</u>. Vào email <u>msv@sv.ufl.udn.vn</u> để lấy mã xác nhận.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Mã sinh viên</label>
+                            <input type="text" class="form-control" id="txtMaSV" placeholder="Mã sinh viên">
+                            <button id="btnGuiEmailMaXacNhan" style="margin-top: 10px;" type="button" class="btn btn-primary" onclick="GuiEmailMaXacNhan()">
+                                <i class="fa fa-send-o"></i> Gửi mã xác nhận
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <div class="row" style="text-align: center; vertical-align: middle; color: red; font-weight: bold; width: 95%; margin-left: 10px;">
+                                Bước 2: Nhập mã xác nhận lấy lại mật khẩu. Vào email <u>msv@sv.ufl.udn.vn</u> để lấy mật khẩu mới.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Mã xác nhận</label>
+                            <input type="text" class="form-control" id="txtMaXacNhan" placeholder="Mã xác nhận">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="XacNhanDoiMatKhau()">
+                        <i class="fa fa-send-o"></i> Lấy lại mật khẩu
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <!-- Shimeji Work Area -->
+    <div id="shimeji-workArea" style="position: fixed; background: transparent; z-index: 2147483643; width: 100vw; height: 100vh; left: 0px; top: 0px; transform: translate(0px, 0px); pointer-events: none;"></div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('#cmbRole').val('0');
+        function CheckForm() {
+            var x = document.forms["loginForm"]["UserName"].value;
+            if (x == null || x == "") {
+                alert("Không được để trống tài khoản");
+                return false;
+            }
+            var y = document.forms["loginForm"]["Password"].value;
+            if (y == null || y == "") {
+                alert("Không được để trống mật khẩu");
+                return false;
+            }
+            // Gán cookie trước khi gửi
+            document.cookie = "ASP.NET_SessionId=ptx232sjth42sjtzaeppiq3e; path=/; domain=sinhvien.ufl.udn.vn; secure";
+            return true;
+        }
+        $('#cmbRole').change(function () {
+            $.ajax({
+                type: 'POST',
+                url: '../Common/SetCacheRole',
+                data: { roleID: $(this).val() },
+                dataType: 'JSON'
+            });
+            if ($('#cmbRole').val() == 2 || $('#cmbRole').val() == "2") {
+                location.href = "/DangNhapSSO/SignIn";
+            }
+        });
+        $('#resetPassword').click(function () {
+            $('#modelLayLaiMatKhau').modal('show');
+        });
+
+        function QuenMatKhau() {
+            $('#modelLayLaiMatKhau').modal('show');
+        }
+
+        function GuiEmailMaXacNhan() {
+            document.getElementById("circularG").style.display = 'block';
+            $('#anHienLoading').removeClass('anLoading1');
+            $('#anHienLoading').addClass('hienLoading11');
+
+            if ($('#txtMaSV').val() == "" || $('#txtMaSV').val() == null) {
+                ShowToastMessage('Không được để trống Mã Sinh Viên!', 'Thất bại', 'error');
+                document.getElementById("circularG").style.display = 'none';
+                $('#anHienLoading').addClass('anLoading1');
+                $('#modelLayLaiMatKhau').modal('hide');
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/DangNhap/GuiEmailMaXacNhan',
+                data: { Ma_sv: $('#txtMaSV').val() },
+                dataType: 'JSON',
+                contentType: 'application/json',
+                success: function (val) {
+                    var kq = val + "";
+                    switch (kq) {
+                        case "1":
+                            ShowToastMessage('Bạn không có Email đăng ký với nhà trường hãy cập nhật Email hoặc nhờ giáo viên chủ nhiệm trợ giúp !', 'Thất bại', 'error');
+                            break;
+                        case "2":
+                            ShowToastMessage('Xin hãy truy cập Email để lấy mã xác nhận !', 'Thành công', 'info');
+                            document.getElementById("btnGuiEmailMaXacNhan").disabled = true;
+                            setTimeout(() => { document.getElementById("btnGuiEmailMaXacNhan").disabled = false; }, 300000);
+                            break;
+                        case "3":
+                            ShowToastMessage('Mã sinh viên bạn nhập không đúng !', 'Thất bại', 'error');
+                            break;
+                        case "4":
+                            ShowToastMessage('Không có tài khoản sinh viên này !', 'Thất bại', 'error');
+                            break;
+                        case "5":
+                            ShowToastMessage('Bạn không có quyền sử dụng chức năng này !', 'Thất bại', 'error');
+                            break;
+                        case "6":
+                            ShowToastMessage('Email đăng ký không đúng định dạng, Hãy liên hệ phòng đào tạo !', 'Thất bại', 'error');
+                            break;
+                        default:
+                            ShowToastMessage(kq, 'Thất bại', 'error');
+                            break;
+                    }
+                    document.getElementById("circularG").style.display = 'none';
+                    $('#anHienLoading').addClass('anLoading1');
+                },
+                error: function () {
+                    ShowToastMessage('', 'Có lỗi xảy ra trong quá trình gửi !', 'error');
+                    document.getElementById("circularG").style.display = 'none';
+                    $('#anHienLoading').addClass('anLoading1');
+                }
+            });
+        }
+
+        function XacNhanDoiMatKhau() {
+            document.getElementById("circularG").style.display = 'block';
+            $('#anHienLoading').removeClass('anLoading1');
+            $('#anHienLoading').addClass('hienLoading11');
+
+            if ($('#txtMaXacNhan').val() == "" || $('#txtMaXacNhan').val() == null) {
+                ShowToastMessage('Nhập mã xác nhận được gửi đến Email!', 'Thất bại', 'error');
+                document.getElementById("circularG").style.display = 'none';
+                $('#anHienLoading').addClass('anLoading1');
+                $('#modelLayLaiMatKhau').modal('hide');
+                return;
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/DangNhap/XacNhanDoiMatKhau',
+                data: { MaXacNhan: $('#txtMaXacNhan').val() },
+                dataType: 'JSON',
+                contentType: 'application/json',
+                success: function (val) {
+                    var kq = val + "";
+                    switch (kq) {
+                        case "1":
+                            ShowToastMessage('Bạn không có Email đăng ký với nhà trường hãy cập nhật Email hoặc nhờ giáo viên chủ nhiệm trợ giúp !', 'Thất bại', 'error');
+                            document.getElementById("circularG").style.display = 'none';
+                            $('#anHienLoading').addClass('anLoading1');
+                            $('#modelLayLaiMatKhau').modal('hide');
+                            break;
+                        case "2":
+                            ShowToastMessage('Xin hãy truy cập Email để lấy lại mật khẩu !', 'Thành công', 'info');
+                            document.getElementById("circularG").style.display = 'none';
+                            $('#anHienLoading').addClass('anLoading1');
+                            $('#modelLayLaiMatKhau').modal('hide');
+                            break;
+                        case "3":
+                            ShowToastMessage('Mã sinh viên bạn nhập không đúng !', 'Thất bại', 'error');
+                            document.getElementById("circularG").style.display = 'none';
+                            $('#anHienLoading').addClass('anLoading1');
+                            $('#modelLayLaiMatKhau').modal('hide');
+                            break;
+                        case "4":
+                            ShowToastMessage('Không có tài khoản sinh viên này !', 'Thất bại', 'error');
+                            document.getElementById("circularG").style.display = 'none';
+                            $('#anHienLoading').addClass('anLoading1');
+                            $('#modelLayLaiMatKhau').modal('hide');
+                            break;
+                        case "5":
+                            ShowToastMessage('Bạn không có quyền sử dụng chức năng này !', 'Thất bại', 'error');
+                            document.getElementById("circularG").style.display = 'none';
+                            $('#anHienLoading').addClass('anLoading1');
+                            $('#modelLayLaiMatKhau').modal('hide');
+                            break;
+                        case "6":
+                            ShowToastMessage('Email đăng ký không đúng định dạng, Hãy liên hệ phòng đào tạo !', 'Thất bại', 'error');
+                            document.getElementById("circularG").style.display = 'none';
+                            $('#anHienLoading').addClass('anLoading1');
+                            $('#modelLayLaiMatKhau').modal('hide');
+                            break;
+                        case "7":
+                            ShowToastMessage('Mã xác nhận không chính xác, kiểm tra lại email !', 'Thất bại', 'error');
+                            document.getElementById("circularG").style.display = 'none';
+                            $('#anHienLoading').addClass('anLoading1');
+                            break;
+                        default:
+                            ShowToastMessage(kq, 'Thất bại', 'error');
+                            document.getElementById("circularG").style.display = 'none';
+                            $('#anHienLoading').addClass('anLoading1');
+                            $('#modelLayLaiMatKhau').modal('hide');
+                            break;
+                    }
+                },
+                error: function () {
+                    ShowToastMessage('', 'Có lỗi xảy ra trong quá trình gửi !', 'error');
+                    document.getElementById("circularG").style.display = 'none';
+                    $('#anHienLoading').addClass('anLoading1');
+                    $('#modelLayLaiMatKhau').modal('hide');
+                }
+            });
+        }
+
+        function ShowToastMessage(value, label, type) {
+            toastr[type](value, label);
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+        }
+    </script>
+</body>
+</html>
